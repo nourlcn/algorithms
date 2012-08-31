@@ -1,3 +1,5 @@
+// 编程珠玑第一章的思路，数据要求：每个数最多出现一次。
+//
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
