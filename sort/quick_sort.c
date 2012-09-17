@@ -2,17 +2,27 @@
 #include <stdlib.h>
 
 int in[]={2,8,7,1,3,9,4,0,6,4,2,9};
+int len;
 
+void print(int* array, int len)
+{
+	int i=0;
+	for(; i< len; i++)
+	{
+		printf("%d\t",array[i]);
+	}
+	printf("\n");
+}
 int partition(int *array, int start,int end)
 {
 	int std = array[end];
 	//position for exchange.
-	int i = start - 1;
+	int i = start-1;
 
 	int j = start;//for loop
-	for (j=start; j<end; j++)
+	for (j=start; j<end+1; j++)
 	{
-		if (array[j] > std)
+		if (array[j]>std)
 		{
 			i++;
 			int tmp = array[i];
@@ -25,7 +35,6 @@ int partition(int *array, int start,int end)
 	int t = array[i];
 	array[i] = std;
 	array[end] = t;
-
 	return i;
 
 }
@@ -36,24 +45,22 @@ void quick_sort(int *array,int start,int end)
 	if ( end > start )
 	{
 		int mid = partition(array,start,end);
+		printf("mid: %d\n",mid);
+		print(array, len);
 		quick_sort(array, start, mid-1);
 		quick_sort(array, mid+1, end);
 	}
 }
+
 int main()
 {	
-	int len=sizeof(in)/sizeof(int);
+	len=sizeof(in)/sizeof(int);
 	int *out = malloc(len*8);
+	printf("origin: ");
+	print(in,len);
 	quick_sort(in,0,len-1);
-
-	int j=0;
-	for(j=0; j<len; j++)
-	{
-		printf("%d\t",in[j]);
-	}
-	printf("\n");
-//	printf("%d\n",len);
-
+	printf("result: ");
+	print(in,len);
 	free(out);
 	return 0;
 }
